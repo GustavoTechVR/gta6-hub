@@ -86,3 +86,24 @@ export async function getAllLocations() {
   if (error) throw error;
   return data as GameLocation[];
 }
+
+export async function getAllCharacters() {
+  const { data, error } = await supabase
+    .from('characters')
+    .select('*')
+    .order('created_at', { ascending: true });
+
+  if (error) throw error;
+  return data as Character[];
+}
+
+export async function getCharacterBySlug(slug: string) {
+  const { data, error } = await supabase
+    .from('characters')
+    .select('*')
+    .eq('slug', slug)
+    .single();
+
+  if (error) return null;
+  return data as Character;
+}

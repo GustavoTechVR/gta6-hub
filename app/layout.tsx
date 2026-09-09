@@ -1,9 +1,10 @@
 // app/layout.tsx
 import type { Metadata } from 'next';
 import './globals.css';
+import Header from './components/Header';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://tu-dominio.com'), // cambia esto cuando tengas dominio
+  metadataBase: new URL('https://tu-dominio.com'),
   title: {
     default: 'GTA 6 Hub | Guías, Mapa y Economía',
     template: '%s | GTA 6 Hub',
@@ -30,18 +31,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className="min-h-screen bg-neutral-950 text-neutral-100 antialiased">
-        <header className="border-b border-neutral-800 px-6 py-4">
-          <nav className="mx-auto flex max-w-5xl items-center justify-between">
-            <a href="/" className="text-lg font-bold">
-              GTA 6 Hub
-            </a>
-            <div className="flex gap-6 text-sm">
-              <a href="/guias">Guías</a>
-              <a href="/mapa">Mapa</a>
-              <a href="/personajes">Personajes</a>
-            </div>
-          </nav>
-        </header>
+        <Header />
         <main className="mx-auto max-w-5xl px-6 py-10">{children}</main>
       </body>
     </html>

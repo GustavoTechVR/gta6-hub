@@ -27,15 +27,23 @@ function createIcon(category: string | null) {
   return L.divIcon({
     className: '',
     html: `<div style="
-      width: 18px;
-      height: 18px;
-      border-radius: 9999px;
-      background: ${color};
-      border: 2px solid white;
-      box-shadow: 0 0 6px rgba(0,0,0,0.5);
-    "></div>`,
-    iconSize: [18, 18],
-    iconAnchor: [9, 9],
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    ">
+      <div style="
+        width: 16px;
+        height: 16px;
+        border-radius: 9999px;
+        background: ${color};
+        border: 2px solid white;
+        box-shadow: 0 0 6px rgba(0,0,0,0.5);
+      "></div>
+    </div>`,
+    iconSize: [28, 28],
+    iconAnchor: [14, 14],
   });
 }
 
@@ -70,7 +78,7 @@ export default function MapaInteractivo({
             position={[loc.lat ?? 0, loc.lng ?? 0]}
             icon={createIcon(loc.category)}
           >
-            <Popup>
+            <Popup maxWidth={240}>
               <div className="text-sm">
                 <span className="text-xs font-semibold uppercase text-emerald-500">
                   {loc.category ?? loc.region}
