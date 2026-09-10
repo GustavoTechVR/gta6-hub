@@ -23,7 +23,9 @@ export default async function PersonajesPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold sm:text-3xl">Personajes</h1>
+      <h1 className="text-2xl font-bold sm:text-3xl">
+        Personaje<span className="text-vice-gradient">s</span>
+      </h1>
       <p className="mt-2 max-w-2xl text-neutral-400">
         Conoce a los protagonistas, aliados y antagonistas de Leonida.
       </p>
@@ -36,7 +38,7 @@ export default async function PersonajesPage() {
             <Link
               key={char.id}
               href={`/personajes/${char.slug}`}
-              className="group overflow-hidden rounded-lg border border-neutral-800 hover:border-emerald-500"
+              className="glow-hover group overflow-hidden rounded-lg border border-neutral-800 bg-vice-dark-2/60"
             >
               <div className="relative aspect-[2/3] w-full overflow-hidden bg-neutral-900">
                 {char.image_url && (
@@ -44,12 +46,13 @@ export default async function PersonajesPage() {
                     src={char.image_url}
                     alt={char.name}
                     fill
-                    className="object-cover transition-transform group-hover:scale-105"
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 )}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-vice-dark via-transparent to-transparent opacity-60" />
               </div>
               <div className="p-4">
-                <span className="text-xs uppercase tracking-wide text-emerald-400">
+                <span className="text-xs font-semibold uppercase tracking-wide text-vice-cyan">
                   {char.role ? roleLabels[char.role] : ''}
                 </span>
                 <h3 className="mt-1 font-semibold">{char.name}</h3>

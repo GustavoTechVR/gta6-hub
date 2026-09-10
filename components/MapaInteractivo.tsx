@@ -16,10 +16,10 @@ const bounds: LatLngBoundsExpression = [
 ];
 
 const categoryColors: Record<string, string> = {
-  tienda: '#34d399',
+  tienda: '#00b2c9',
   coleccionable: '#fbbf24',
-  mision: '#f87171',
-  evento: '#60a5fa',
+  mision: '#ee00dd',
+  evento: '#0266c8',
 };
 
 function createIcon(category: string | null) {
@@ -61,11 +61,11 @@ export default function MapaInteractivo({
   locations: GameLocation[];
 }) {
   return (
-    <div className="mt-6 h-[70vh] w-full overflow-hidden rounded-lg border border-neutral-800">
+    <div className="mt-6 h-[70vh] w-full max-w-full overflow-hidden rounded-lg border border-vice-pink/20 shadow-[0_0_30px_rgba(238,0,221,0.08)]">
       <MapContainer
         crs={CRS.Simple}
         bounds={bounds}
-        style={{ height: '100%', width: '100%', background: '#0a0a0a' }}
+        style={{ height: '100%', width: '100%', background: '#0a0a0f' }}
         maxBoundsViscosity={1.0}
         minZoom={-1}
         maxZoom={2}
@@ -92,4 +92,4 @@ export default function MapaInteractivo({
       </MapContainer>
     </div>
   );
-}
+}cmd

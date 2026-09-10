@@ -1,7 +1,14 @@
 // app/layout.tsx
 import type { Metadata } from 'next';
+import { Rajdhani } from 'next/font/google';
 import './globals.css';
 import Header from './components/Header';
+
+const rajdhani = Rajdhani({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-rajdhani',
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://tu-dominio.com'),
@@ -29,8 +36,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es">
-      <body className="min-h-screen bg-neutral-950 text-neutral-100 antialiased">
+    <html lang="es" className={rajdhani.variable}>
+      <body className="min-h-screen antialiased">
         <Header />
         <main className="mx-auto max-w-5xl px-6 py-10">{children}</main>
       </body>

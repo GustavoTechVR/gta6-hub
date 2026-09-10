@@ -1,5 +1,4 @@
 // app/guias/page.tsx
-// VERSIÓN CORREGIDA para Next.js 15/16: searchParams ahora es una Promise
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getPublishedGuides } from '@/lib/supabase';
@@ -30,15 +29,17 @@ export default async function GuidesPage({
 
   return (
     <div>
-      <h1 className="text-3xl font-bold">Guías</h1>
+      <h1 className="text-2xl font-bold sm:text-3xl">
+        Guía<span className="text-vice-gradient">s</span>
+      </h1>
 
       <div className="mt-6 flex flex-wrap gap-2">
         <Link
           href="/guias"
-          className={`rounded-full border px-4 py-1 text-sm ${
+          className={`rounded-full border px-4 py-1 text-sm transition-colors ${
             !activeCategory
-              ? 'border-emerald-500 text-emerald-400'
-              : 'border-neutral-700 text-neutral-400'
+              ? 'border-vice-pink bg-vice-pink/10 text-vice-pink'
+              : 'border-neutral-700 text-neutral-400 hover:border-vice-cyan/50 hover:text-vice-cyan'
           }`}
         >
           Todas
@@ -47,10 +48,10 @@ export default async function GuidesPage({
           <Link
             key={cat.key}
             href={`/guias?categoria=${cat.key}`}
-            className={`rounded-full border px-4 py-1 text-sm ${
+            className={`rounded-full border px-4 py-1 text-sm transition-colors ${
               activeCategory === cat.key
-                ? 'border-emerald-500 text-emerald-400'
-                : 'border-neutral-700 text-neutral-400'
+                ? 'border-vice-pink bg-vice-pink/10 text-vice-pink'
+                : 'border-neutral-700 text-neutral-400 hover:border-vice-cyan/50 hover:text-vice-cyan'
             }`}
           >
             {cat.label}
@@ -68,9 +69,9 @@ export default async function GuidesPage({
             <Link
               key={guide.id}
               href={`/guias/${guide.slug}`}
-              className="rounded-lg border border-neutral-800 p-4 hover:border-emerald-500"
+              className="glow-hover rounded-lg border border-neutral-800 bg-vice-dark-2/60 p-4"
             >
-              <span className="text-xs uppercase tracking-wide text-emerald-400">
+              <span className="text-xs font-semibold uppercase tracking-wide text-vice-cyan">
                 {guide.category}
               </span>
               <h3 className="mt-2 font-semibold">{guide.title}</h3>

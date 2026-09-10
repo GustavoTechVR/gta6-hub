@@ -16,7 +16,9 @@ export default async function MapaPage() {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold">Mapa de Leonida</h1>
+      <h1 className="text-2xl font-bold sm:text-3xl">
+        Mapa de <span className="text-vice-gradient">Leonida</span>
+      </h1>
       <p className="mt-2 max-w-2xl text-neutral-400">
         Explora las regiones confirmadas y rumoreadas de Leonida. Haz clic en
         cada punto para ver más detalles.
@@ -24,16 +26,16 @@ export default async function MapaPage() {
 
       <div className="mt-4 flex flex-wrap gap-4 text-xs text-neutral-400">
         <span className="flex items-center gap-1">
-          <span className="h-3 w-3 rounded-full bg-emerald-400" /> Tiendas
+          <span className="h-3 w-3 rounded-full bg-vice-cyan" /> Tiendas
         </span>
         <span className="flex items-center gap-1">
           <span className="h-3 w-3 rounded-full bg-amber-400" /> Coleccionables
         </span>
         <span className="flex items-center gap-1">
-          <span className="h-3 w-3 rounded-full bg-red-400" /> Misiones
+          <span className="h-3 w-3 rounded-full bg-vice-pink" /> Misiones
         </span>
         <span className="flex items-center gap-1">
-          <span className="h-3 w-3 rounded-full bg-blue-400" /> Eventos
+          <span className="h-3 w-3 rounded-full bg-vice-blue" /> Eventos
         </span>
       </div>
 

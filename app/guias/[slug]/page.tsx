@@ -35,14 +35,14 @@ export default async function GuidePage({
 
   return (
     <article>
-      <span className="text-xs uppercase tracking-wide text-emerald-400">
+      <span className="text-xs font-semibold uppercase tracking-wide text-vice-cyan">
         {guide.category}
       </span>
-      <h1 className="mt-2 text-3xl font-bold">{guide.title}</h1>
-      <p className="mt-2 text-neutral-400">{guide.description}</p>
+      <h1 className="mt-2 text-3xl font-bold sm:text-4xl">{guide.title}</h1>
+      <p className="mt-3 max-w-2xl text-neutral-400">{guide.description}</p>
 
       <div
-        className="prose prose-invert mt-8 max-w-none"
+        className="prose prose-invert prose-headings:text-vice-gradient prose-a:text-vice-cyan mt-8 max-w-none border-t border-vice-pink/10 pt-8"
         dangerouslySetInnerHTML={{ __html: guide.content }}
       />
     </article>
