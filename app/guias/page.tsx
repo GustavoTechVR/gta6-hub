@@ -71,10 +71,10 @@ export default async function GuidesPage({
               href={`/guias/${guide.slug}`}
               className="glow-hover overflow-hidden rounded-lg border border-neutral-800 bg-vice-dark-2/60"
             >
-              {guide.image_url && (
+              {guide.cover_image_url && (
                 <div className="relative aspect-video w-full overflow-hidden">
                   <img
-                    src={guide.image_url}
+                    src={guide.cover_image_url}
                     alt={guide.title}
                     className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
                   />
