@@ -1,3 +1,4 @@
+
 // app/personajes/[slug]/page.tsx
 import type { Metadata } from 'next';
 import Image from 'next/image';
@@ -54,9 +55,20 @@ export default async function CharacterPage({
       </div>
 
       <div>
-        <span className="text-xs uppercase tracking-wide text-emerald-400">
-          {character.role ? roleLabels[character.role] : ''}
-        </span>
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="text-xs uppercase tracking-wide text-emerald-400">
+            {character.role ? roleLabels[character.role] : ''}
+          </span>
+          {character.is_speculative ? (
+            <span className="rounded-full bg-amber-500/15 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-amber-400">
+              Personaje especulativo — teoría de la comunidad
+            </span>
+          ) : (
+            <span className="rounded-full bg-emerald-500/15 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-emerald-400">
+              Confirmado oficialmente por Rockstar
+            </span>
+          )}
+        </div>
         <h1 className="mt-2 text-3xl font-bold">{character.name}</h1>
         <p className="mt-4 text-neutral-300">{character.description}</p>
       </div>

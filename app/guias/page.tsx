@@ -69,15 +69,26 @@ export default async function GuidesPage({
             <Link
               key={guide.id}
               href={`/guias/${guide.slug}`}
-              className="glow-hover rounded-lg border border-neutral-800 bg-vice-dark-2/60 p-4"
+              className="glow-hover overflow-hidden rounded-lg border border-neutral-800 bg-vice-dark-2/60"
             >
-              <span className="text-xs font-semibold uppercase tracking-wide text-vice-cyan">
-                {guide.category}
-              </span>
-              <h3 className="mt-2 font-semibold">{guide.title}</h3>
-              <p className="mt-1 line-clamp-2 text-sm text-neutral-400">
-                {guide.description}
-              </p>
+              {guide.image_url && (
+                <div className="relative aspect-video w-full overflow-hidden">
+                  <img
+                    src={guide.image_url}
+                    alt={guide.title}
+                    className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+                  />
+                </div>
+              )}
+              <div className="p-4">
+                <span className="text-xs font-semibold uppercase tracking-wide text-vice-cyan">
+                  {guide.category}
+                </span>
+                <h3 className="mt-2 font-semibold">{guide.title}</h3>
+                <p className="mt-1 line-clamp-2 text-sm text-neutral-400">
+                  {guide.description}
+                </p>
+              </div>
             </Link>
           ))}
         </div>

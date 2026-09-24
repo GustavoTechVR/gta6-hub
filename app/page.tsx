@@ -1,6 +1,7 @@
 // app/page.tsx
 import Link from 'next/link';
 import { getPublishedGuides } from '@/lib/supabase';
+import TrailerHome from '@/components/TrailerHome';
 
 export default async function HomePage() {
   const guides = await getPublishedGuides();
@@ -32,6 +33,8 @@ export default async function HomePage() {
           </Link>
         </div>
       </section>
+
+      <TrailerHome />
 
       <section className="mt-10">
         <h2 className="text-xl font-semibold">Guías recientes</h2>

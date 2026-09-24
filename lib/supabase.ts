@@ -6,7 +6,6 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-// lib/types.ts (puedes poner esto en un archivo separado lib/types.ts)
 export interface Guide {
   id: string;
   slug: string;
@@ -28,6 +27,7 @@ export interface Character {
   description: string;
   role: 'protagonista' | 'antagonista' | 'secundario' | null;
   image_url: string | null;
+  is_speculative: boolean;
   created_at: string;
 }
 

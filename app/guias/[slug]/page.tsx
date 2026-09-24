@@ -41,6 +41,16 @@ export default async function GuidePage({
       <h1 className="mt-2 text-3xl font-bold sm:text-4xl">{guide.title}</h1>
       <p className="mt-3 max-w-2xl text-neutral-400">{guide.description}</p>
 
+      {guide.image_url && (
+        <div className="relative mt-6 aspect-video w-full overflow-hidden rounded-lg border border-vice-pink/20">
+          <img
+            src={guide.image_url}
+            alt={guide.title}
+            className="h-full w-full object-cover"
+          />
+        </div>
+      )}
+
       <div
         className="prose prose-invert prose-headings:text-vice-gradient prose-a:text-vice-cyan mt-8 max-w-none border-t border-vice-pink/10 pt-8"
         dangerouslySetInnerHTML={{ __html: guide.content }}

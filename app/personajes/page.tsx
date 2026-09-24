@@ -7,7 +7,7 @@ import { getAllCharacters } from '@/lib/supabase';
 export const metadata: Metadata = {
   title: 'Personajes de GTA 6',
   description:
-    'Conoce a los personajes de Leonida: protagonistas, aliados y antagonistas.',
+    'Conoce a los personajes de Leonida: protagonistas confirmados, aliados y antagonistas especulativos.',
 };
 
 const roleLabels: Record<string, string> = {
@@ -27,7 +27,8 @@ export default async function PersonajesPage() {
         Personaje<span className="text-vice-gradient">s</span>
       </h1>
       <p className="mt-2 max-w-2xl text-neutral-400">
-        Conoce a los protagonistas, aliados y antagonistas de Leonida.
+        Conoce a los protagonistas confirmados de Leonida, además de aliados
+        y antagonistas especulativos imaginados por la comunidad.
       </p>
 
       {characters.length === 0 ? (
@@ -50,6 +51,11 @@ export default async function PersonajesPage() {
                   />
                 )}
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-vice-dark via-transparent to-transparent opacity-60" />
+                {char.is_speculative && (
+                  <span className="absolute left-2 top-2 rounded-full bg-amber-500/90 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-black">
+                    Especulativo
+                  </span>
+                )}
               </div>
               <div className="p-4">
                 <span className="text-xs font-semibold uppercase tracking-wide text-vice-cyan">
