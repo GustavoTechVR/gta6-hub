@@ -51,7 +51,11 @@ function FitBounds() {
 
     fit();
     window.addEventListener('resize', fit);
-    return () => window.removeEventListener('resize', fit);
+    window.addEventListener('orientationchange', fit);
+    return () => {
+      window.removeEventListener('resize', fit);
+      window.removeEventListener('orientationchange', fit);
+    };
   }, [map]);
 
   return null;
@@ -63,10 +67,7 @@ export default function MapaInteractivo({
   locations: GameLocation[];
 }) {
   return (
-    <div
-      className="relative z-0 mt-6 w-full max-w-full overflow-hidden rounded-lg border border-vice-pink/20 shadow-[0_0_30px_rgba(238,0,221,0.08)]"
-      style={{ aspectRatio: `${IMAGE_WIDTH} / ${IMAGE_HEIGHT}` }}
-    >
+    <div className="map-frame relative z-0 mt-6 overflow-hidden border-vice-pink/20 shadow-[0_0_30px_rgba(238,0,221,0.08)]">
       <MapContainer
         crs={CRS.Simple}
         bounds={bounds}

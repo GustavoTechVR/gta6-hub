@@ -39,3 +39,29 @@ body {
     color: transparent;
   }
 }
+
+/* Mapa interactivo: pantalla completa y dinámico en mobile, encajado en desktop */
+.map-frame {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  height: 75dvh;
+  min-height: 420px;
+  border-radius: 0;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 0;
+  border-right-width: 0;
+}
+
+@media (min-width: 640px) {
+  .map-frame {
+    width: 100%;
+    margin-left: 0;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 1080 / 1350;
+    max-height: 80dvh;
+    border-radius: 0.5rem;
+    border-width: 1px;
+  }
+}
