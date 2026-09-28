@@ -84,11 +84,11 @@ export default async function CharacterPage({
         </h1>
 
         {tagline && (
-          <blockquote className="relative mt-6 border-l-4 border-vice-pink pl-5">
-            <span className="pointer-events-none absolute -left-1 -top-4 select-none font-serif text-6xl leading-none text-vice-pink/30">
+          <blockquote className="relative mt-8 border-l-4 border-vice-pink pl-8">
+            <span className="pointer-events-none absolute left-3 -top-5 select-none font-serif text-5xl leading-none text-vice-pink/30">
               &ldquo;
             </span>
-            <p className="text-lg italic text-vice-cyan sm:text-xl">
+            <p className="pl-2 text-lg italic text-vice-cyan sm:text-xl">
               {tagline}
             </p>
           </blockquote>
