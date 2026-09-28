@@ -39,7 +39,7 @@ const roleLabels: Record<string, string> = {
 };
 
 function stripTagline(description: string) {
-  const match = description.match(/^«([^»]+)»\s*(.*)$/s);
+  const match = description.match(/^«([^»]+)»\s*([\s\S]*)$/);
   return match ? match[2] : description;
 }
 

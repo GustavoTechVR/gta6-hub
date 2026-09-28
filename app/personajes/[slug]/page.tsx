@@ -11,7 +11,7 @@ const roleLabels: Record<string, string> = {
 };
 
 function splitTagline(description: string) {
-  const match = description.match(/^«([^»]+)»\s*(.*)$/s);
+  const match = description.match(/^«([^»]+)»\s*([\s\S]*)$/);
   if (!match) {
     return { tagline: null, body: description };
   }
