@@ -38,6 +38,30 @@ const roleLabels: Record<string, string> = {
   secundario: 'Secundario',
 };
 
+// Orden fijo deseado. Cualquier personaje nuevo que no esté en esta lista
+// se agrega al final, ordenado alfabéticamente por nombre.
+const CHARACTER_ORDER = [
+  'jason-duval',
+  'lucia-caminos',
+  'cal-hampton',
+  'boobie-ike',
+  'drequan-priest',
+  'real-dimez',
+  'raul-bautista',
+  'brian-heder',
+];
+
+function sortCharacters<T extends { slug: string; name: string }>(chars: T[]): T[] {
+  return [...chars].sort((a, b) => {
+    const indexA = CHARACTER_ORDER.indexOf(a.slug);
+    const indexB = CHARACTER_ORDER.indexOf(b.slug);
+    if (indexA === -1 && indexB === -1) return a.name.localeCompare(b.name);
+    if (indexA === -1) return 1;
+    if (indexB === -1) return -1;
+    return indexA - indexB;
+  });
+}
+
 function stripTagline(description: string) {
   const match = description.match(/^«([^»]+)»\s*([\s\S]*)$/);
   return match ? match[2] : description;
@@ -46,7 +70,7 @@ function stripTagline(description: string) {
 export const dynamic = 'force-dynamic';
 
 export default async function PersonajesPage() {
-  const characters = await getAllCharacters();
+  const characters = sortCharacters(await getAllCharacters());
 
   return (
     <div>
@@ -61,7 +85,7 @@ export default async function PersonajesPage() {
       {characters.length === 0 ? (
         <p className="mt-8 text-neutral-500">Todavía no hay personajes cargados.</p>
       ) : (
-        <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+        <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
           {characters.map((char) => (
             <Link
               key={char.id}
