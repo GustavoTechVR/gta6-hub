@@ -4,10 +4,32 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getAllCharacters } from '@/lib/supabase';
 
+const title = 'Personajes de GTA 6';
+const description =
+  'Conoce a los personajes de Leonida: protagonistas confirmados, aliados y antagonistas especulativos.';
+
 export const metadata: Metadata = {
-  title: 'Personajes de GTA 6',
-  description:
-    'Conoce a los personajes de Leonida: protagonistas confirmados, aliados y antagonistas especulativos.',
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    type: 'website',
+    images: [
+      {
+        url: '/images/guias/jason-lucia.png',
+        width: 1200,
+        height: 630,
+        alt: 'Jason y Lucia, protagonistas de GTA 6',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title,
+    description,
+    images: ['/images/guias/jason-lucia.png'],
+  },
 };
 
 const roleLabels: Record<string, string> = {
@@ -15,6 +37,11 @@ const roleLabels: Record<string, string> = {
   antagonista: 'Antagonista',
   secundario: 'Secundario',
 };
+
+function stripTagline(description: string) {
+  const match = description.match(/^«([^»]+)»\s*(.*)$/s);
+  return match ? match[2] : description;
+}
 
 export const dynamic = 'force-dynamic';
 
@@ -63,7 +90,7 @@ export default async function PersonajesPage() {
                 </span>
                 <h3 className="mt-1 font-semibold">{char.name}</h3>
                 <p className="mt-1 line-clamp-2 text-sm text-neutral-400">
-                  {char.description}
+                  {stripTagline(char.description)}
                 </p>
               </div>
             </Link>

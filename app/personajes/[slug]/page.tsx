@@ -1,4 +1,3 @@
-
 // app/personajes/[slug]/page.tsx
 import type { Metadata } from 'next';
 import Image from 'next/image';
@@ -10,6 +9,14 @@ const roleLabels: Record<string, string> = {
   antagonista: 'Antagonista',
   secundario: 'Secundario',
 };
+
+function splitTagline(description: string) {
+  const match = description.match(/^«([^»]+)»\s*(.*)$/s);
+  if (!match) {
+    return { tagline: null, body: description };
+  }
+  return { tagline: match[1], body: match[2] };
+}
 
 export async function generateMetadata({
   params,
@@ -41,6 +48,8 @@ export default async function CharacterPage({
     notFound();
   }
 
+  const { tagline, body } = splitTagline(character.description);
+
   return (
     <article className="grid grid-cols-1 gap-8 md:grid-cols-[300px_1fr]">
       <div className="relative aspect-[2/3] w-full overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900">
@@ -54,7 +63,7 @@ export default async function CharacterPage({
         )}
       </div>
 
-      <div>
+      <div className="rounded-lg border border-vice-pink/10 bg-vice-dark-2/40 p-6 sm:p-8">
         <div className="flex flex-wrap items-center gap-2">
           <span className="text-xs uppercase tracking-wide text-emerald-400">
             {character.role ? roleLabels[character.role] : ''}
@@ -69,8 +78,25 @@ export default async function CharacterPage({
             </span>
           )}
         </div>
-        <h1 className="mt-2 text-3xl font-bold">{character.name}</h1>
-        <p className="mt-4 text-neutral-300">{character.description}</p>
+
+        <h1 className="mt-3 text-3xl font-bold sm:text-4xl">
+          <span className="text-vice-gradient">{character.name}</span>
+        </h1>
+
+        {tagline && (
+          <blockquote className="relative mt-6 border-l-4 border-vice-pink pl-5">
+            <span className="pointer-events-none absolute -left-1 -top-4 select-none font-serif text-6xl leading-none text-vice-pink/30">
+              &ldquo;
+            </span>
+            <p className="text-lg italic text-vice-cyan sm:text-xl">
+              {tagline}
+            </p>
+          </blockquote>
+        )}
+
+        <p className="mt-5 max-w-2xl text-base leading-relaxed text-neutral-300">
+          {body}
+        </p>
       </div>
     </article>
   );
