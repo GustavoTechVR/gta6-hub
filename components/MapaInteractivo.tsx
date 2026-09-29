@@ -54,18 +54,25 @@ function FitBounds() {
   useEffect(() => {
     const fit = () => {
       map.invalidateSize();
-      map.fitBounds(bounds, { animate: false });
-      const currentZoom = map.getZoom();
-      map.setMinZoom(currentZoom);
-      map.setMaxZoom(currentZoom + 3);
+      const fitZoom = map.getBoundsZoom(bounds, false);
+      map.setMinZoom(fitZoom);
+      map.setMaxZoom(fitZoom + 3);
       map.setMaxBounds(bounds);
+      map.setView(bounds.getCenter(), fitZoom, { animate: false });
     };
 
+    // Recalcula apenas el contenedor tenga su tamaño real, no solo al cambiar
+    // el tamaño de la ventana. Esto evita que el mapa quede "pegado" en un
+    // zoom incorrecto si el layout todavía no había terminado de acomodarse.
+    const container = map.getContainer();
+    const resizeObserver = new ResizeObserver(() => fit());
+    resizeObserver.observe(container);
+
     fit();
-    window.addEventListener('resize', fit);
     window.addEventListener('orientationchange', fit);
+
     return () => {
-      window.removeEventListener('resize', fit);
+      resizeObserver.disconnect();
       window.removeEventListener('orientationchange', fit);
     };
   }, [map]);
@@ -83,6 +90,8 @@ export default function MapaInteractivo({
       <MapContainer
         crs={CRS.Simple}
         bounds={bounds}
+        minZoom={-10}
+        maxZoom={10}
         style={{ height: '100%', width: '100%', background: '#0a0a0f' }}
         maxBounds={bounds}
         maxBoundsViscosity={1.0}
