@@ -12,7 +12,19 @@ const IMAGE_HEIGHT = 4800;
 
 const bounds = L.latLngBounds([0, 0], [IMAGE_HEIGHT, IMAGE_WIDTH]);
 
-function createIcon() {
+// Color por región, elegido según su temática visual
+const REGION_COLORS: Record<string, string> = {
+  'vice-city': '#ee00dd', // rosa neón: la ciudad
+  'leonida-keys': '#00e5ff', // turquesa: aguas tropicales
+  grassrivers: '#22c55e', // verde: el pantano
+  'port-gellhorn': '#f59e0b', // ámbar: costa decadente
+  ambrosia: '#eab308', // dorado: caña de azúcar
+  'mount-kalaga': '#94a3b8', // gris azulado: montaña/piedra
+};
+
+const DEFAULT_COLOR = '#ee00dd';
+
+function createIcon(color: string) {
   return L.divIcon({
     className: '',
     html: `<div style="
@@ -26,7 +38,7 @@ function createIcon() {
         width: 16px;
         height: 16px;
         border-radius: 9999px;
-        background: #ee00dd;
+        background: ${color};
         border: 2px solid white;
         box-shadow: 0 0 6px rgba(0,0,0,0.5);
       "></div>
@@ -42,11 +54,11 @@ function FitBounds() {
   useEffect(() => {
     const fit = () => {
       map.invalidateSize();
-      const fitZoom = map.getBoundsZoom(bounds, false);
-      map.setMinZoom(fitZoom);
-      map.setMaxZoom(fitZoom + 2);
+      map.fitBounds(bounds, { animate: false });
+      const currentZoom = map.getZoom();
+      map.setMinZoom(currentZoom);
+      map.setMaxZoom(currentZoom + 3);
       map.setMaxBounds(bounds);
-      map.setView(bounds.getCenter(), fitZoom);
     };
 
     fit();
@@ -82,7 +94,11 @@ export default function MapaInteractivo({
         <FitBounds />
         <ImageOverlay url="/images/mapa-leonida.png" bounds={bounds} />
         {locations.map((loc) => (
-          <Marker key={loc.id} position={[loc.lat ?? 0, loc.lng ?? 0]} icon={createIcon()}>
+          <Marker
+            key={loc.id}
+            position={[loc.lat ?? 0, loc.lng ?? 0]}
+            icon={createIcon(REGION_COLORS[loc.slug] ?? DEFAULT_COLOR)}
+          >
             <Popup maxWidth={240}>
               <div className="text-sm">
                 <span className="text-xs font-semibold uppercase text-emerald-500">
