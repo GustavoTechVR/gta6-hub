@@ -7,8 +7,8 @@ import L, { CRS } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import type { GameLocation } from '@/lib/supabase';
 
-const IMAGE_WIDTH = 1080;
-const IMAGE_HEIGHT = 1350;
+const IMAGE_WIDTH = 3840;
+const IMAGE_HEIGHT = 4800;
 
 const bounds = L.latLngBounds([0, 0], [IMAGE_HEIGHT, IMAGE_WIDTH]);
 
