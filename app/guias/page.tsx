@@ -15,6 +15,7 @@ const categories = [
   { key: 'personajes', label: 'Personajes' },
   { key: 'misiones', label: 'Misiones' },
   { key: 'coleccionables', label: 'Coleccionables' },
+  { key: 'noticias', label: 'Noticias' },
 ];
 
 export const dynamic = 'force-dynamic';
