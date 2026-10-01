@@ -11,15 +11,16 @@ const IMAGE_WIDTH = 3840;
 const IMAGE_HEIGHT = 4800;
 
 const bounds = L.latLngBounds([0, 0], [IMAGE_HEIGHT, IMAGE_WIDTH]);
+const panBounds = bounds.pad(0.15); // 15% de colchon para que el popup pueda hacer auto-pan
 
-// Color por región, elegido según su temática visual
+// Color por region, elegido segun su tematica visual
 const REGION_COLORS: Record<string, string> = {
-  'vice-city': '#ee00dd', // rosa neón: la ciudad
+  'vice-city': '#ee00dd', // rosa neon: la ciudad
   'leonida-keys': '#00e5ff', // turquesa: aguas tropicales
   grassrivers: '#22c55e', // verde: el pantano
-  'port-gellhorn': '#f59e0b', // ámbar: costa decadente
-  ambrosia: '#eab308', // dorado: caña de azúcar
-  'mount-kalaga': '#94a3b8', // gris azulado: montaña/piedra
+  'port-gellhorn': '#f59e0b', // ambar: costa decadente
+  ambrosia: '#eab308', // dorado: cana de azucar
+  'mount-kalaga': '#94a3b8', // gris azulado: montana/piedra
 };
 
 const DEFAULT_COLOR = '#ee00dd';
@@ -57,13 +58,13 @@ function FitBounds() {
       const fitZoom = map.getBoundsZoom(bounds, false);
       map.setMinZoom(fitZoom);
       map.setMaxZoom(fitZoom + 3);
-      map.setMaxBounds(bounds);
+      map.setMaxBounds(panBounds);
       map.setView(bounds.getCenter(), fitZoom, { animate: false });
     };
 
-    // Recalcula apenas el contenedor tenga su tamaño real, no solo al cambiar
-    // el tamaño de la ventana. Esto evita que el mapa quede "pegado" en un
-    // zoom incorrecto si el layout todavía no había terminado de acomodarse.
+    // Recalcula apenas el contenedor tenga su tamano real, no solo al cambiar
+    // el tamano de la ventana. Esto evita que el mapa quede "pegado" en un
+    // zoom incorrecto si el layout todavia no habia terminado de acomodarse.
     const container = map.getContainer();
     const resizeObserver = new ResizeObserver(() => fit());
     resizeObserver.observe(container);
@@ -93,7 +94,7 @@ export default function MapaInteractivo({
         minZoom={-10}
         maxZoom={10}
         style={{ height: '100%', width: '100%', background: '#0a0a0f' }}
-        maxBounds={bounds}
+        maxBounds={panBounds}
         maxBoundsViscosity={1.0}
         scrollWheelZoom={false}
         doubleClickZoom={true}
@@ -108,7 +109,7 @@ export default function MapaInteractivo({
             position={[loc.lat ?? 0, loc.lng ?? 0]}
             icon={createIcon(REGION_COLORS[loc.slug] ?? DEFAULT_COLOR)}
           >
-            <Popup maxWidth={240}>
+            <Popup maxWidth={220} autoPan={true} autoPanPadding={[30, 30]}>
               <div className="text-sm">
                 <span className="text-xs font-semibold uppercase text-emerald-500">
                   {loc.category ?? loc.region}
